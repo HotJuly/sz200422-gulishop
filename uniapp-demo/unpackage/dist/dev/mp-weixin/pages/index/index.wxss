@@ -18,9 +18,19 @@
           flex-shrink: 0;
 }
 .indexContainer .header .search {
+  position: relative;
   height: 60rpx;
   width: 100%;
   background-color: #eee;
+  padding-left: 70rpx;
+}
+.indexContainer .header .search .iconfont {
+  position: absolute;
+  left: 20rpx;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
 }
 .indexContainer .header .search input {
   height: 60rpx;
@@ -28,6 +38,7 @@
 .indexContainer .header .search input .placeholder {
   font-size: 24rpx;
   text-align: center;
+  text-indent: -60rpx;
 }
 .indexContainer .header button {
   width: 144rpx;
@@ -39,5 +50,23 @@
           flex-shrink: 0;
   margin: 0 20rpx;
   color: #f00;
+}
+.indexContainer .navScroll {
+  white-space: nowrap;
+  height: 80rpx;
+}
+.indexContainer .navScroll .navItem {
+  display: inline-block;
+  width: 140rpx;
+  height: 80rpx;
+  font-size: 28rpx;
+  line-height: 80rpx;
+  text-align: center;
+  margin: 0 10rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.indexContainer .navScroll .navItem.active {
+  border-bottom: 2rpx solid #f00;
 }
 
