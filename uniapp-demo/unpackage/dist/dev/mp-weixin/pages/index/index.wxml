@@ -1,1 +1,1 @@
-<view class="content"><image class="logo" src="/static/logo.png"></image><view class="text-area"><text class="title">{{title}}</text></view></view>
+<view class="indexContainer"><view class="header"><image class="logo" src="/static/images/logo.png" mode></image><view class="search"><input type="text" value="" placeholder="搜索商品" placeholder-class="placeholder"/></view><button class="username">七月</button></view></view>

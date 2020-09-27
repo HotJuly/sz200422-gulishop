@@ -6,7 +6,7 @@
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "atguigu",
-    "navigationBarBackgroundColor": "#FF00FF",
+    "navigationBarBackgroundColor": "#BB2C08",
     "backgroundColor": "#F8F8F8"
   },
   "usingComponents": {}

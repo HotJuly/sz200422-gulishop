@@ -1,8 +1,11 @@
 <template>
-	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
+	<view class="indexContainer">
+		<view class="header">
+			<image class="logo" src="/static/images/logo.png" mode=""></image>
+			<view class="search">
+				<input type="text" value=""  placeholder="搜索商品" placeholder-class="placeholder"/>
+			</view>
+			<button class="username">七月</button>
 		</view>
 	</view>
 </template>
@@ -23,30 +26,32 @@
 	}
 </script>
 
-<style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50rpx;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
-	}
+<style lang="stylus">
+	.indexContainer
+		.header
+			display flex
+			align-items center
+			margin-top 20upx
+			.logo
+				width 140upx
+				height 40upx
+				margin 0 20upx
+				flex-shrink 0
+			.search
+				height 60upx
+				width 100%
+				background-color #eee
+				input
+					height 60upx
+					.placeholder
+						font-size 24upx
+						text-align center
+			button
+				width 144upx
+				height 60upx
+				font-size 28upx
+				line-height 60upx
+				flex-shrink 0
+				margin 0 20upx
+				color red
 </style>
