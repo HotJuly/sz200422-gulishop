@@ -9,13 +9,16 @@
 			<button class="username">七月</button>
 		</view>
 		<scroll-view class="navScroll" scroll-x v-if="indexData.kingKongModule" >
-			<view class="navItem active">推荐</view>
-			<view class="navItem" 
-			v-for="item in indexData.kingKongModule.kingKongList" 
+			<view class="navItem" :class="navIndex===-1?'active':''"
+			@click="changeNavIndex(-1)">推荐</view>
+			<view class="navItem" :class="navIndex===index?'active':''"
+			@click="changeNavIndex(index)"
+			v-for="(item,index) in indexData.kingKongModule.kingKongList" 
 			:key="item.L1Id">{{item.text}}</view>
 		</scroll-view>
 		<scroll-view class="contentScroll" scroll-y="true" >
-			<Recommend/>
+			<Recommend v-if="navIndex===-1"/>
+			<CateList :navIndex="navIndex" v-else/>
 		</scroll-view>
 	</view>
 </template>
@@ -23,10 +26,11 @@
 <script>
 	import {mapState} from 'vuex';
 	import Recommend from '../../components/Recommend/Recommend.vue';
+	import CateList from '../../components/cateList/cateList.vue';
 	export default {
 		data() {
 			return {
-				
+				navIndex:0
 			}
 		},
 		/*
@@ -41,7 +45,8 @@
 			this.$store.dispatch('getIndexData')
 		},
 		components:{
-			Recommend
+			Recommend,
+			CateList
 		},
 		computed:{
 			// initData(){
@@ -50,6 +55,11 @@
 			...mapState({
 				indexData:state=>state.home.indexData
 			})
+		},
+		methods:{
+			changeNavIndex(index){
+				this.navIndex=index;
+			}
 		}
 	}
 </script>

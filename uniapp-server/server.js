@@ -36,6 +36,16 @@ router.get('/getIndexData',(ctx,next)=>{
     ctx.body=indexData
 })
 
+//用于返回首页分类页面数据
+const indexCateList = require('./datas/indexCateList.json');
+router.get('/getindexCateList',async (ctx,next)=>{
+	await new Promise((resolve)=>{
+		setTimeout(resolve,2000)
+		// setTimeout(()=>{},2000)
+	})
+    ctx.body=indexCateList
+})
+
 //2.运行并监听服务器
 app.listen(3002,(error)=>{
     if(error){
