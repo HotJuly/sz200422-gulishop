@@ -14,20 +14,19 @@
 			v-for="item in indexData.kingKongModule.kingKongList" 
 			:key="item.L1Id">{{item.text}}</view>
 		</scroll-view>
-		{{initData}}
-		<Recommend/>
+		<scroll-view class="contentScroll" scroll-y="true" >
+			<Recommend/>
+		</scroll-view>
 	</view>
 </template>
 
 <script>
 	import {mapState} from 'vuex';
-	import request from '../../utils/request.js';
-	import indexData from '../../utils/datas/index.json';
 	import Recommend from '../../components/Recommend/Recommend.vue';
 	export default {
 		data() {
 			return {
-				indexData:{}
+				
 			}
 		},
 		/*
@@ -38,12 +37,8 @@
 		*/
 		async mounted() {
 			// console.log('mounted')
-			let result = await request('/getIndexData');
-			if(!result){
-				result=indexData;
-			}
-			this.indexData=indexData;
 			// console.log(result)
+			this.$store.dispatch('getIndexData')
 		},
 		components:{
 			Recommend
@@ -53,7 +48,7 @@
 			// 	return this.$store.state.home.initData
 			// }
 			...mapState({
-				initData:state=>state.home.initData
+				indexData:state=>state.home.indexData
 			})
 		}
 	}
@@ -110,4 +105,6 @@
 			box-sizing border-box
 			&.active
 				border-bottom 2upx solid red
+	.contentScroll
+		height calc(100vh - 80upx - 80upx)
 </style>
