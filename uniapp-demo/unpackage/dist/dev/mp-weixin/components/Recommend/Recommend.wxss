@@ -1,0 +1,8 @@
+.recommnedContainer .bannerSwiper {
+  height: 350rpx;
+}
+.recommnedContainer .bannerSwiper .bannerImg {
+  width: 100%;
+  height: 100%;
+}
+

@@ -1,0 +1,34 @@
+<template>
+	<view class="recommnedContainer">
+		<swiper class="bannerSwiper" :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
+			<swiper-item>
+				<image class="bannerImg" src="https://yanxuan.nosdn.127.net/b4f1825564cb1c071ef3b96a11ae11a8.jpg?type=webp&imageView&quality=75&thumbnail=750x0" mode=""></image>
+			</swiper-item>
+			<swiper-item>
+				<image class="bannerImg" src="https://yanxuan.nosdn.127.net/3cdf019e3111d65b861d93c6182f7596.jpg?type=webp&imageView&quality=75&thumbnail=750x0" mode=""></image>
+			</swiper-item>
+			<swiper-item>
+				<image class="bannerImg" src="https://yanxuan.nosdn.127.net/7a67e59b334b50c6d94f13bedc50d2c3.jpg?type=webp&imageView&quality=75&thumbnail=750x0" mode=""></image>
+			</swiper-item>
+		</swiper>
+	</view>
+</template>
+
+<script>
+	export default{
+		data(){
+			return{
+				
+			}
+		}
+	}
+</script>
+
+<style lang="stylus">
+	.recommnedContainer
+		.bannerSwiper
+			height 350upx
+			.bannerImg
+				width 100%;
+				height 100%
+</style>

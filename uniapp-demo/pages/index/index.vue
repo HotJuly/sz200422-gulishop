@@ -14,12 +14,14 @@
 			v-for="item in indexData.kingKongModule.kingKongList" 
 			:key="item.L1Id">{{item.text}}</view>
 		</scroll-view>
+		<Recommend/>
 	</view>
 </template>
 
 <script>
 	import request from '../../utils/request.js';
 	import indexData from '../../utils/datas/index.json';
+	import Recommend from '../../components/Recommend/Recommend.vue';
 	export default {
 		data() {
 			return {
@@ -40,6 +42,9 @@
 			}
 			this.indexData=indexData;
 			// console.log(result)
+		},
+		components:{
+			Recommend
 		}
 	}
 </script>
