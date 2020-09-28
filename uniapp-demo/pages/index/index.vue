@@ -38,17 +38,27 @@
 </template>
 
 <script>
+	import request from '../../utils/request.js';
+	import indexData from '../../utils/datas/index.json';
 	export default {
 		data() {
 			return {
 				title: 'Hello'
 			}
 		},
-		onLoad() {
-
-		},
-		methods: {
-
+		/*
+			onLoad->页面开始加载
+			mounted->页面挂载完毕
+			uniapp中,除了可以使用小程序的组件,还可以使用小程序的生命周期
+			但是,无论是uniapp,还是mpvue,都推荐使用Vue的生命周期,不推荐小程序的生命周期
+		*/
+		async mounted() {
+			// console.log('mounted')
+			let result = await request('http://localhost:3002/getIndexData');
+			if(!result){
+				result=indexData;
+			}
+			console.log(result)
 		}
 	}
 </script>
