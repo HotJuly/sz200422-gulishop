@@ -8,31 +8,11 @@
 			</view>
 			<button class="username">七月</button>
 		</view>
-		<scroll-view class="navScroll" scroll-x >
+		<scroll-view class="navScroll" scroll-x v-if="indexData.kingKongModule" >
 			<view class="navItem active">推荐</view>
-			<view class="navItem">居家生活</view>
-			<view class="navItem">美食酒水</view>
-			<view class="navItem">服饰鞋包</view>
-			<view class="navItem">推荐</view>
-			<view class="navItem">居家生活</view>
-			<view class="navItem">美食酒水</view>
-			<view class="navItem">服饰鞋包</view>
-			<view class="navItem">推荐</view>
-			<view class="navItem">居家生活</view>
-			<view class="navItem">美食酒水</view>
-			<view class="navItem">服饰鞋包</view>
-			<view class="navItem">推荐</view>
-			<view class="navItem">居家生活</view>
-			<view class="navItem">美食酒水</view>
-			<view class="navItem">服饰鞋包</view>
-			<view class="navItem">推荐</view>
-			<view class="navItem">居家生活</view>
-			<view class="navItem">美食酒水</view>
-			<view class="navItem">服饰鞋包</view>
-			<view class="navItem">推荐</view>
-			<view class="navItem">居家生活</view>
-			<view class="navItem">美食酒水</view>
-			<view class="navItem">服饰鞋包</view>
+			<view class="navItem" 
+			v-for="item in indexData.kingKongModule.kingKongList" 
+			:key="item.L1Id">{{item.text}}</view>
 		</scroll-view>
 	</view>
 </template>
@@ -43,7 +23,7 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				indexData:{}
 			}
 		},
 		/*
@@ -54,11 +34,12 @@
 		*/
 		async mounted() {
 			// console.log('mounted')
-			let result = await request('http://localhost:3002/getIndexData');
+			let result = await request('/getIndexData');
 			if(!result){
 				result=indexData;
 			}
-			console.log(result)
+			this.indexData=indexData;
+			// console.log(result)
 		}
 	}
 </script>
