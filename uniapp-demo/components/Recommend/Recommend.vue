@@ -21,7 +21,7 @@
 		</view>
 		
 		<!-- kingKongList区域 -->
-		<view class="kingKongList">
+		<view class="kingKongList" v-if="indexData.kingKongModule">
 			<view class="kingKongItem" v-for="kingKongItem in indexData.kingKongModule.kingKongList" :key="kingKongItem.L1Id">
 				<image class="kingKongImg" :src="kingKongItem.picUrl" mode=""></image>
 				<text class="text">{{kingKongItem.text}}</text>

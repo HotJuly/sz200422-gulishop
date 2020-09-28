@@ -70,6 +70,6 @@
   border-bottom: 2rpx solid #f00;
 }
 .indexContainer .contentScroll {
-  height: calc(100vh - 80rpx - 80rpx);
+  height: calc(100vh - 80rpx - 80rpx - 0px - 0px);
 }
 

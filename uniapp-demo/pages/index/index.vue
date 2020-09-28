@@ -30,7 +30,7 @@
 	export default {
 		data() {
 			return {
-				navIndex:0
+				navIndex:-1
 			}
 		},
 		/*
@@ -116,5 +116,6 @@
 			&.active
 				border-bottom 2upx solid red
 	.contentScroll
-		height calc(100vh - 80upx - 80upx)
+		// --window-bottom在h5端值为50px->在小程序端没有值
+		height calc(100vh - 80upx - 80upx - var(--window-bottom) - var(--window-top))
 </style>
