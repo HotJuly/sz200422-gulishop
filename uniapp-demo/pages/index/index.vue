@@ -14,11 +14,13 @@
 			v-for="item in indexData.kingKongModule.kingKongList" 
 			:key="item.L1Id">{{item.text}}</view>
 		</scroll-view>
+		{{initData}}
 		<Recommend/>
 	</view>
 </template>
 
 <script>
+	import {mapState} from 'vuex';
 	import request from '../../utils/request.js';
 	import indexData from '../../utils/datas/index.json';
 	import Recommend from '../../components/Recommend/Recommend.vue';
@@ -45,6 +47,14 @@
 		},
 		components:{
 			Recommend
+		},
+		computed:{
+			// initData(){
+			// 	return this.$store.state.home.initData
+			// }
+			...mapState({
+				initData:state=>state.home.initData
+			})
 		}
 	}
 </script>
