@@ -207,7 +207,6 @@ const mutations={
 		// 	shopItem.selected=selected
 		// })
 		state.cartList.forEach(shopItem=>shopItem.selected=selected)
-		// console.log(result)
 	}
 }
 

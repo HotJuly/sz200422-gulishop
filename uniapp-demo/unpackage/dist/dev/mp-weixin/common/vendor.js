@@ -1714,7 +1714,6 @@ _mutationTypes.CHANGESELECTEDALLMUTATION, function (state, selected) {
   // 	shopItem.selected=selected
   // })
   state.cartList.forEach(function (shopItem) {return shopItem.selected = selected;});
-  // console.log(result)
 }), _mutations);
 
 

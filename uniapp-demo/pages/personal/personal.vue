@@ -105,7 +105,7 @@
 			//当用户已授权,二次进入该项目,自动获取授权信息
 			uni.getUserInfo({
 				success:(res)=>{
-					// console.log(res)
+					console.log(res)
 					this.userInfo=res.userInfo
 				}
 			})
