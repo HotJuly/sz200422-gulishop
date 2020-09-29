@@ -8,83 +8,21 @@
 		<view class="content">
 			<view class="leftContainer">
 				<scroll-view scroll-y="true" class="navScroll">
-					<view class="navItem active">居家生活</view>
-					<view class="navItem">居家生活</view>
-					<view class="navItem">居家生活</view>
-					<view class="navItem">居家生活</view>
-					<view class="navItem">居家生活</view>
-					<view class="navItem">居家生活</view>
-					<view class="navItem">居家生活</view>
-					<view class="navItem">居家生活</view>
-					<view class="navItem">居家生活</view>
-					<view class="navItem">居家生活</view>
-					<view class="navItem">居家生活</view>
-					<view class="navItem">居家生活</view>
-					<view class="navItem">居家生活</view>
-					<view class="navItem">居家生活</view>
-					<view class="navItem">居家生活</view>
+					<view class="navItem"
+					 :class="navIndex===index?'active':''"
+					 v-for="(category,index) in categoryDatas"
+					 @click="changeNavIndex(index)"
+					 :key="category.id">{{category.name}}</view>
 				</scroll-view>
 			</view>
 			<view class="rightContainer">
 				<scroll-view scroll-y="true" class="contentScroll">
 					<view class="scrollHeader">
-						<image class="headerImg" src="https://yanxuan.nosdn.127.net/9fafb4adb40303dc2914c3aa04da03df.jpg?quality=75&type=webp&imageView&thumbnail=0x196" mode=""></image>
+						<image class="headerImg" :src="categoryObj.imgUrl" mode=""></image>
 					</view>
-					<view class="contentItem">
-						<image src="http://yanxuan.nosdn.127.net/749f0ba087d2035b6d2937b4919952de.png" mode=""></image>
-						<text>秋冬好物</text>
-					</view>
-					<view class="contentItem">
-						<image src="http://yanxuan.nosdn.127.net/749f0ba087d2035b6d2937b4919952de.png" mode=""></image>
-						<text>秋冬好物</text>
-					</view>
-					<view class="contentItem">
-						<image src="http://yanxuan.nosdn.127.net/749f0ba087d2035b6d2937b4919952de.png" mode=""></image>
-						<text>秋冬好物</text>
-					</view>
-					<view class="contentItem">
-						<image src="http://yanxuan.nosdn.127.net/749f0ba087d2035b6d2937b4919952de.png" mode=""></image>
-						<text>秋冬好物</text>
-					</view>
-					<view class="contentItem">
-						<image src="http://yanxuan.nosdn.127.net/749f0ba087d2035b6d2937b4919952de.png" mode=""></image>
-						<text>秋冬好物</text>
-					</view>
-					<view class="contentItem">
-						<image src="http://yanxuan.nosdn.127.net/749f0ba087d2035b6d2937b4919952de.png" mode=""></image>
-						<text>秋冬好物</text>
-					</view>
-					<view class="contentItem">
-						<image src="http://yanxuan.nosdn.127.net/749f0ba087d2035b6d2937b4919952de.png" mode=""></image>
-						<text>秋冬好物</text>
-					</view>
-					<view class="contentItem">
-						<image src="http://yanxuan.nosdn.127.net/749f0ba087d2035b6d2937b4919952de.png" mode=""></image>
-						<text>秋冬好物</text>
-					</view>
-					<view class="contentItem">
-						<image src="http://yanxuan.nosdn.127.net/749f0ba087d2035b6d2937b4919952de.png" mode=""></image>
-						<text>秋冬好物</text>
-					</view>
-					<view class="contentItem">
-						<image src="http://yanxuan.nosdn.127.net/749f0ba087d2035b6d2937b4919952de.png" mode=""></image>
-						<text>秋冬好物</text>
-					</view>
-					<view class="contentItem">
-						<image src="http://yanxuan.nosdn.127.net/749f0ba087d2035b6d2937b4919952de.png" mode=""></image>
-						<text>秋冬好物</text>
-					</view>
-					<view class="contentItem">
-						<image src="http://yanxuan.nosdn.127.net/749f0ba087d2035b6d2937b4919952de.png" mode=""></image>
-						<text>秋冬好物</text>
-					</view>
-					<view class="contentItem">
-						<image src="http://yanxuan.nosdn.127.net/749f0ba087d2035b6d2937b4919952de.png" mode=""></image>
-						<text>秋冬好物</text>
-					</view>
-					<view class="contentItem">
-						<image src="http://yanxuan.nosdn.127.net/749f0ba087d2035b6d2937b4919952de.png" mode=""></image>
-						<text>秋冬好物</text>
+					<view class="contentItem" v-for="item in categoryObj.subCateList" :key="item.id">
+						<image :src="item.wapBannerUrl" mode=""></image>
+						<text>{{item.name}}</text>
 					</view>
 				</scroll-view>
 			</view>
@@ -93,11 +31,28 @@
 </template>
 
 <script>
+	import request from '../../utils/request.js';
 	export default {
 		data() {
 			return {
-				
+				navIndex:0,
+				categoryDatas:[]
 			};
+		},
+		async mounted(){
+			let result = await request('/getCategoryDatas');
+			console.log(result)
+			this.categoryDatas=result;
+		},
+		methods:{
+			changeNavIndex(index){
+				this.navIndex=index;
+			}
+		},
+		computed:{
+			categoryObj(){
+				return this.categoryDatas[this.navIndex]
+			}
 		}
 	}
 </script>

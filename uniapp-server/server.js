@@ -46,6 +46,12 @@ router.get('/getindexCateList',async (ctx,next)=>{
     ctx.body=indexCateList
 })
 
+//用于返回分类页面数据
+const categoryDatas = require('./datas/categoryDatas.json');
+router.get('/getCategoryDatas',(ctx,next)=>{
+    ctx.body=categoryDatas
+})
+
 //2.运行并监听服务器
 app.listen(3002,(error)=>{
     if(error){
