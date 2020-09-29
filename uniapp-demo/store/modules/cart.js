@@ -1,4 +1,5 @@
-import {ADDSHOPITEMMUTATION} from "../mutation-types.js";
+import Vue from 'vue';
+import {ADDSHOPITEMMUTATION,CHANGECOUNTMUTATION} from "../mutation-types.js";
 const state={
 	cartList:[
 		{
@@ -165,11 +166,30 @@ const mutations={
 		*/
 	   let shopItem = state.cartList.find(shopItem=>shopItem.id===good.id);
 	   if(!shopItem){
-		   good.count=1;
+		   console.log('1')
+		   Vue.set(good,"count",1);
+		   // good.count=1;
 		   state.cartList.push(good)
 	   }else{
 		   shopItem.count++;
+		   console.log('+1',shopItem)
 	   }
+	},
+	[CHANGECOUNTMUTATION](state,{type,index}){
+		console.log("changeCountMutation",type,index)
+		//找到对应的商品shopItem
+		let shopItem = state.cartList[index];
+		if(type){
+			//type为true,说明数量+1
+			shopItem.count++;
+		}else{
+			//type为false,说明数量-1
+			if(shopItem.count===1){
+				state.cartList.splice(index,1);
+			}else{
+			shopItem.count--;
+			}
+		}
 	}
 }
 

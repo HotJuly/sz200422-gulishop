@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/cart/cart",
     "pages/personal/personal",
     "pages/login/login",
     "pages/category/category",
     "pages/index/index",
-    "pages/cart/cart",
     "pages/detail/detail"
   ],
   "subPackages": [],

@@ -6,3 +6,5 @@
 export const CHANGEINDEXDATA="changeIndexData";
 
 export const ADDSHOPITEMMUTATION="addShopItemMutation";
+
+export const CHANGECOUNTMUTATION="changeCountMutation";

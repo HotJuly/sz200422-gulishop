@@ -17,8 +17,8 @@
 		</block>
 		<!-- 登陆之后的购物车 -->
 		<block v-else>
-			<view class="cartList">
-				<view class="cartItem" v-for="shopItem in cartList" :key="shopItem.id">
+			<view class="cartList" v-if="cartList.length">
+				<view class="cartItem" v-for="(shopItem,index) in cartList" :key="shopItem.id">
 					<text class='iconfont icon-xuanzhong selected'></text>
 					<view class="shopItem">
 						<image class="shopImg" :src="shopItem.listPicUrl" mode=""></image>
@@ -29,13 +29,19 @@
 					</view>
 					<!-- 控制数量 -->
 					<view class="countCtrl">
-						<text class="add"> + </text>
+						<text class="add" @click="changeCount(true,index)"> + </text>
 						<text class="count"> {{shopItem.count}} </text>
-						<text class="del"> - </text>
+						<text class="del" @click="changeCount(false,index)"> - </text>
 					</view>
 				</view>
 				
 			</view>
+			
+			<block v-else>
+				<image class="cartImg" src="http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/noCart-d6193bd6e4.png?imageView&type=webp" mode=""></image>
+				<view class="hint">购物车还是空的，赶紧去购物吧</view>
+			</block>
+			
 			<!-- 底部下单 -->
 			<view class="cartFooter">
 				<text class='iconfont icon-xuanzhong selected'></text>
@@ -51,7 +57,7 @@
 </template>
 
 <script>
-	import {mapState} from 'vuex';
+	import {mapState,mapMutations} from 'vuex';
 	export default {
 		data() {
 			return {
@@ -73,7 +79,14 @@
 				uni.navigateTo({
 					url:"/pages/login/login"
 				})
-			}
+			},
+			changeCount(type,index){
+				this.changeCountMutation({type,index})
+			},
+			...mapMutations(["changeCountMutation"]),
+			// changeCountMutation(){
+			// 	this.$store.commit("changeCountMutation")
+			// }
 		}
 	}
 </script>
