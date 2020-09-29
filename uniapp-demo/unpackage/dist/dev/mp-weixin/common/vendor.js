@@ -1505,7 +1505,8 @@ uni$1;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var state = {
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _mutationTypes = __webpack_require__(/*! ../mutation-types.js */ 24);function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+var state = {
   cartList: [
   {
     "count": 5,
@@ -1662,8 +1663,21 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var mutations = {};
-
+var mutations = _defineProperty({},
+_mutationTypes.ADDSHOPITEMMUTATION, function (state, good) {
+  // console.log('ADDSHOPITEMMUTATION')
+  /*
+  	需求1:cartList数组中没有该商品的时候,新增一个
+  	需求2:如果cartList数组中已经存在该商品,将他的数量+1
+  */
+  var shopItem = state.cartList.find(function (shopItem) {return shopItem.id === good.id;});
+  if (!shopItem) {
+    good.count = 1;
+    state.cartList.push(good);
+  } else {
+    shopItem.count++;
+  }
+});
 
 
 var actions = {};
@@ -9651,12 +9665,14 @@ module.exports = {"tagList":[{"floorPrice":39.9,"picUrl":"https://yanxuan.nosdn.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.CHANGEINDEXDATA = void 0; // export const A = "a";
+Object.defineProperty(exports, "__esModule", { value: true });exports.ADDSHOPITEMMUTATION = exports.CHANGEINDEXDATA = void 0; // export const A = "a";
 // //1000行代码
 // export const A = "a";
 
 //alt+shift+u->转大写	alt+shift+l->转小写
 var CHANGEINDEXDATA = "changeIndexData";exports.CHANGEINDEXDATA = CHANGEINDEXDATA;
+
+var ADDSHOPITEMMUTATION = "addShopItemMutation";exports.ADDSHOPITEMMUTATION = ADDSHOPITEMMUTATION;
 
 /***/ }),
 
@@ -10606,7 +10622,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "首页", "usingComponents": { "recommend": "/components/Recommend/Recommend", "cate-list": "/components/cateList/cateList" } }, "pages/category/category": { "navigationBarTitleText": "分类", "usingComponents": {} }, "pages/cart/cart": { "navigationBarTitleText": "购物车", "usingComponents": {} }, "pages/personal/personal": { "navigationBarTitleText": "个人中心", "usingComponents": {} }, "pages/login/login": { "navigationBarTitleText": "登录", "usingComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "atguigu", "navigationBarBackgroundColor": "#BB2C08", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "首页", "usingComponents": { "recommend": "/components/Recommend/Recommend", "cate-list": "/components/cateList/cateList" } }, "pages/category/category": { "navigationBarTitleText": "分类", "usingComponents": {} }, "pages/cart/cart": { "navigationBarTitleText": "购物车", "usingComponents": {} }, "pages/personal/personal": { "navigationBarTitleText": "个人中心", "usingComponents": {} }, "pages/login/login": { "navigationBarTitleText": "登录", "usingComponents": {} }, "pages/detail/detail": {} }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "atguigu", "navigationBarBackgroundColor": "#BB2C08", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 

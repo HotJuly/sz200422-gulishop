@@ -52,6 +52,36 @@ router.get('/getCategoryDatas',(ctx,next)=>{
     ctx.body=categoryDatas
 })
 
+//用于返回对应商品数据
+const goods = require('./datas/goods.json');
+router.get('/getGoodDetail',(ctx,next)=>{
+	//1.获取query传参过来的商品id
+	// console.log(ctx.query)
+		let {goodId} = ctx.query;
+	//2.从goods数据中,找到对应的商品对象
+	//find 找到符合条件的对象,返回值是第一个符合的对象  没找到,返回值是undefined
+	//filter  找到->存储所有满足条件的对象的数组	没找到,返回值是空数组
+		let good = goods.find((item,index)=>{
+			//位运算符 >>> <<<
+			return item.id===goodId*1
+			// return item.id===goodId>>>0
+		})
+	//3.返回响应
+		let body;
+		if(good){
+			body={
+				code:200,
+				data:good
+			}
+		}else{
+			body={
+				code:201,
+				data:"查无此商品"
+			}
+		}
+		ctx.body=body
+})
+
 //2.运行并监听服务器
 app.listen(3002,(error)=>{
     if(error){

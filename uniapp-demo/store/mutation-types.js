@@ -4,3 +4,5 @@
 
 //alt+shift+u->转大写	alt+shift+l->转小写
 export const CHANGEINDEXDATA="changeIndexData";
+
+export const ADDSHOPITEMMUTATION="addShopItemMutation";

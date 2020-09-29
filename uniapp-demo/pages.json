@@ -29,6 +29,10 @@
 				"navigationBarTitleText": "购物车"
 			}
         }
+        ,{
+            "path" : "pages/detail/detail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

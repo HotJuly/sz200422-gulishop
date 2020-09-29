@@ -1,3 +1,4 @@
+import {ADDSHOPITEMMUTATION} from "../mutation-types.js";
 const state={
 	cartList:[
 		{
@@ -156,7 +157,20 @@ const state={
 }
 
 const mutations={
-	
+	[ADDSHOPITEMMUTATION](state,good){
+		// console.log('ADDSHOPITEMMUTATION')
+		/*
+			需求1:cartList数组中没有该商品的时候,新增一个
+			需求2:如果cartList数组中已经存在该商品,将他的数量+1
+		*/
+	   let shopItem = state.cartList.find(shopItem=>shopItem.id===good.id);
+	   if(!shopItem){
+		   good.count=1;
+		   state.cartList.push(good)
+	   }else{
+		   shopItem.count++;
+	   }
+	}
 }
 
 const actions={
