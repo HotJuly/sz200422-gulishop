@@ -9,7 +9,7 @@ const state={
 const mutations={
 	[CHANGEINDEXDATA](state,indexData){
 		state.indexData=indexData
-		console.log(state)
+		// console.log(state)
 	},
 	// [A](){
 	// 	console.log('我是甲编写的mutation-a')

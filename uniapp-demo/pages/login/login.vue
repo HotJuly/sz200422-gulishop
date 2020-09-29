@@ -23,7 +23,7 @@
 		methods: {
 			getUserInfo(res){
 				// console.log(res)
-				let {userInfo}=res.detail;
+				let {userInfo,rawData}=res.detail;
 				if(userInfo){
 					//弹出授权成功提示窗口
 					uni.showToast({
@@ -34,6 +34,7 @@
 							})
 						}
 					})
+					uni.setStorageSync("userInfo",rawData);
 					
 				}else{
 					//弹出授权失败提示窗口

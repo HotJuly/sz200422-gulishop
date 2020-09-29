@@ -147,7 +147,7 @@ var _default =
   methods: {
     getUserInfo: function getUserInfo(res) {
       // console.log(res)
-      var userInfo = res.detail.userInfo;
+      var _res$detail = res.detail,userInfo = _res$detail.userInfo,rawData = _res$detail.rawData;
       if (userInfo) {
         //弹出授权成功提示窗口
         uni.showToast({
@@ -158,6 +158,7 @@ var _default =
 
           } });
 
+        uni.setStorageSync("userInfo", rawData);
 
       } else {
         //弹出授权失败提示窗口

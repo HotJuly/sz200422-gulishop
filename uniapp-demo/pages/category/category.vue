@@ -41,7 +41,7 @@
 		},
 		async mounted(){
 			let result = await request('/getCategoryDatas');
-			console.log(result)
+			// console.log(result)
 			this.categoryDatas=result;
 		},
 		methods:{
