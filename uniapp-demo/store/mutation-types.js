@@ -8,3 +8,7 @@ export const CHANGEINDEXDATA="changeIndexData";
 export const ADDSHOPITEMMUTATION="addShopItemMutation";
 
 export const CHANGECOUNTMUTATION="changeCountMutation";
+
+export const CHANGESELECTEDMUTATION="changeSelectedMutation";
+
+export const CHANGESELECTEDALLMUTATION="changeSelectedAllMutation";

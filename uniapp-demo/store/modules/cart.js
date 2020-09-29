@@ -1,8 +1,9 @@
 import Vue from 'vue';
-import {ADDSHOPITEMMUTATION,CHANGECOUNTMUTATION} from "../mutation-types.js";
+import {ADDSHOPITEMMUTATION,CHANGECOUNTMUTATION ,CHANGESELECTEDMUTATION,CHANGESELECTEDALLMUTATION} from "../mutation-types.js";
 const state={
 	cartList:[
 		{
+			"selected":false,
 			"count":5,
 		    "promId": 0,
 		    "showPoints": false,
@@ -79,6 +80,7 @@ const state={
 		    "itemSizeTableFlag": false
 		},
 		{
+			"selected":true,
 			"count":2,
 		    "promId": 0,
 		    "showPoints": false,
@@ -168,6 +170,7 @@ const mutations={
 	   if(!shopItem){
 		   console.log('1')
 		   Vue.set(good,"count",1);
+		   Vue.set(good,"selected",true);
 		   // good.count=1;
 		   state.cartList.push(good)
 	   }else{
@@ -176,7 +179,7 @@ const mutations={
 	   }
 	},
 	[CHANGECOUNTMUTATION](state,{type,index}){
-		console.log("changeCountMutation",type,index)
+		// console.log("changeCountMutation",type,index)
 		//找到对应的商品shopItem
 		let shopItem = state.cartList[index];
 		if(type){
@@ -190,6 +193,21 @@ const mutations={
 			shopItem.count--;
 			}
 		}
+	},
+	[CHANGESELECTEDMUTATION](state,{selected,index}){
+		console.log('changeSelectedMutation',selected,index)
+		let shopItem=state.cartList[index];
+		shopItem.selected=selected;
+		//当用户点击选中按钮的时候，修改对应商品的选中状态
+	},
+	[CHANGESELECTEDALLMUTATION](state,selected){
+		// console.log('changeSelectedAllMutation',selected)
+		//遍历所有的商品,将他们的选中状态都改成指定状态
+		// state.cartList.forEach(shopItem=>{
+		// 	shopItem.selected=selected
+		// })
+		state.cartList.forEach(shopItem=>shopItem.selected=selected)
+		// console.log(result)
 	}
 }
 
@@ -198,7 +216,21 @@ const actions={
 }
 
 const getters={
-	
+	isSelectedAll(state){
+		/*全选按钮
+			思路:
+				1)当购物车中所有的商品的选中状态都为true,全选按钮状态应该是选中(true)
+				2)当购物车中部分商品的选中状态为false,全选按钮状态应该是未选中(false)
+				3)当购物车中没有商品,全选按钮状态应该是未选中
+				4)返回值是布尔值
+				5)因为全选按钮的状态,是根据state中的数据进行计算的,所以可以使用getter
+		*/
+		//find filter map some every
+		//some代表数组中至少有一个满足条件,返回值为true,否则为false
+		//every代表数组中所有元素都满足条件,返回值为true,否则为false
+		let result = state.cartList.every(shopItem=>shopItem.selected)
+		return result;
+	}
 }
 
 export default{

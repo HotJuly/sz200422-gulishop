@@ -19,7 +19,10 @@
 		<block v-else>
 			<view class="cartList" v-if="cartList.length">
 				<view class="cartItem" v-for="(shopItem,index) in cartList" :key="shopItem.id">
-					<text class='iconfont icon-xuanzhong selected'></text>
+					<text class='iconfont icon-xuanzhong' 
+					:class="shopItem.selected?'selected':''"
+					@click="changeSelected(!shopItem.selected,index)"
+					></text>
 					<view class="shopItem">
 						<image class="shopImg" :src="shopItem.listPicUrl" mode=""></image>
 						<view class="shopInfo">
@@ -44,7 +47,10 @@
 			
 			<!-- 底部下单 -->
 			<view class="cartFooter">
-				<text class='iconfont icon-xuanzhong selected'></text>
+				<text class='iconfont icon-xuanzhong' 
+				:class="isSelectedAll?'selected':''"
+				@click="changeSelectedAll(!isSelectedAll)"
+				></text>
 				<text class="allSelected">已选 3</text>
 				<view class="right">
 					<text class="totalPrice">合计: ￥1000</text>
@@ -57,7 +63,7 @@
 </template>
 
 <script>
-	import {mapState,mapMutations} from 'vuex';
+	import {mapState,mapMutations,mapGetters} from 'vuex';
 	export default {
 		data() {
 			return {
@@ -72,7 +78,8 @@
 		computed:{
 			...mapState({
 				cartList:state=>state.cart.cartList
-			})
+			}),
+			...mapGetters(["isSelectedAll"])
 		},
 		methods:{
 			toLogin(){
@@ -83,7 +90,13 @@
 			changeCount(type,index){
 				this.changeCountMutation({type,index})
 			},
-			...mapMutations(["changeCountMutation"]),
+			changeSelected(selected,index){
+				this.changeSelectedMutation({selected,index})
+			},
+			changeSelectedAll(selected){
+				this.changeSelectedAllMutation(selected)
+			},
+			...mapMutations(["changeCountMutation","changeSelectedMutation","changeSelectedAllMutation"]),
 			// changeCountMutation(){
 			// 	this.$store.commit("changeCountMutation")
 			// }

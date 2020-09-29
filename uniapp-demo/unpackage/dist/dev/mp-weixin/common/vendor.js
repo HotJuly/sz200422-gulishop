@@ -1510,6 +1510,7 @@ var _mutationTypes = __webpack_require__(/*! ../mutation-types.js */ 24);var _mu
 var state = {
   cartList: [
   {
+    "selected": false,
     "count": 5,
     "promId": 0,
     "showPoints": false,
@@ -1586,6 +1587,7 @@ var state = {
     "itemSizeTableFlag": false },
 
   {
+    "selected": true,
     "count": 2,
     "promId": 0,
     "showPoints": false,
@@ -1675,6 +1677,7 @@ _mutationTypes.ADDSHOPITEMMUTATION, function (state, good) {
   if (!shopItem) {
     console.log('1');
     _vue.default.set(good, "count", 1);
+    _vue.default.set(good, "selected", true);
     // good.count=1;
     state.cartList.push(good);
   } else {
@@ -1683,7 +1686,7 @@ _mutationTypes.ADDSHOPITEMMUTATION, function (state, good) {
   }
 }), _defineProperty(_mutations,
 _mutationTypes.CHANGECOUNTMUTATION, function (state, _ref) {var type = _ref.type,index = _ref.index;
-  console.log("changeCountMutation", type, index);
+  // console.log("changeCountMutation",type,index)
   //找到对应的商品shopItem
   var shopItem = state.cartList[index];
   if (type) {
@@ -1697,6 +1700,21 @@ _mutationTypes.CHANGECOUNTMUTATION, function (state, _ref) {var type = _ref.type
       shopItem.count--;
     }
   }
+}), _defineProperty(_mutations,
+_mutationTypes.CHANGESELECTEDMUTATION, function (state, _ref2) {var selected = _ref2.selected,index = _ref2.index;
+  console.log('changeSelectedMutation', selected, index);
+  var shopItem = state.cartList[index];
+  shopItem.selected = selected;
+  //当用户点击选中按钮的时候，修改对应商品的选中状态
+}), _defineProperty(_mutations,
+_mutationTypes.CHANGESELECTEDALLMUTATION, function (state, selected) {
+  // console.log('changeSelectedAllMutation',selected)
+  //遍历所有的商品,将他们的选中状态都改成指定状态
+  // state.cartList.forEach(shopItem=>{
+  // 	shopItem.selected=selected
+  // })
+  state.cartList.forEach(function (shopItem) {return shopItem.selected = selected;});
+  // console.log(result)
 }), _mutations);
 
 
@@ -1704,8 +1722,22 @@ var actions = {};
 
 
 
-var getters = {};var _default =
-
+var getters = {
+  isSelectedAll: function isSelectedAll(state) {
+    /*全选按钮
+                                                	思路:
+                                                		1)当购物车中所有的商品的选中状态都为true,全选按钮状态应该是选中(true)
+                                                		2)当购物车中部分商品的选中状态为false,全选按钮状态应该是未选中(false)
+                                                		3)当购物车中没有商品,全选按钮状态应该是未选中
+                                                		4)返回值是布尔值
+                                                		5)因为全选按钮的状态,是根据state中的数据进行计算的,所以可以使用getter
+                                                */
+    //find filter map some every
+    //some代表数组中至少有一个满足条件,返回值为true,否则为false
+    //every代表数组中所有元素都满足条件,返回值为true,否则为false
+    var result = state.cartList.every(function (shopItem) {return shopItem.selected;});
+    return result;
+  } };var _default =
 
 
 {
@@ -9685,7 +9717,7 @@ module.exports = {"tagList":[{"floorPrice":39.9,"picUrl":"https://yanxuan.nosdn.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.CHANGECOUNTMUTATION = exports.ADDSHOPITEMMUTATION = exports.CHANGEINDEXDATA = void 0; // export const A = "a";
+Object.defineProperty(exports, "__esModule", { value: true });exports.CHANGESELECTEDALLMUTATION = exports.CHANGESELECTEDMUTATION = exports.CHANGECOUNTMUTATION = exports.ADDSHOPITEMMUTATION = exports.CHANGEINDEXDATA = void 0; // export const A = "a";
 // //1000行代码
 // export const A = "a";
 
@@ -9695,6 +9727,10 @@ var CHANGEINDEXDATA = "changeIndexData";exports.CHANGEINDEXDATA = CHANGEINDEXDAT
 var ADDSHOPITEMMUTATION = "addShopItemMutation";exports.ADDSHOPITEMMUTATION = ADDSHOPITEMMUTATION;
 
 var CHANGECOUNTMUTATION = "changeCountMutation";exports.CHANGECOUNTMUTATION = CHANGECOUNTMUTATION;
+
+var CHANGESELECTEDMUTATION = "changeSelectedMutation";exports.CHANGESELECTEDMUTATION = CHANGESELECTEDMUTATION;
+
+var CHANGESELECTEDALLMUTATION = "changeSelectedAllMutation";exports.CHANGESELECTEDALLMUTATION = CHANGESELECTEDALLMUTATION;
 
 /***/ }),
 
